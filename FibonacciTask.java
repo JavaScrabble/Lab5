@@ -17,20 +17,21 @@ import java.util.concurrent.Callable;
 
         @Override
         public Long call() {
+            if(this.n < 0) return null;
 
-            if (n <= 1)
-                return (long) n;
+            if (this.n <= 1)
+                return (long) this.n;
 
             long a = 0, b = 1;
             for (int i = 2; i <= n; i++) {
                 if (Thread.currentThread().isInterrupted()) {
-                    System.out.println(this + "interrupted!");
+                    System.out.println(this + " przerwane");
                     return null;
                 }
                 try {
                     Thread.sleep(200);
                 } catch (InterruptedException e) {
-                    System.out.println(this + " sleep() interrupted!");
+                    System.out.println(this + " sleep() przerwane");
                     return null;
                 }
                 long temp = a + b;
