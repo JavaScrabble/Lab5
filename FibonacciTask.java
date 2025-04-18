@@ -1,9 +1,6 @@
 import java.util.concurrent.Callable;
 
-public class FibonacciTaskManager {
-
-    // Zadanie obliczające liczbę Fibonacciego
-    static class FibonacciTask implements Callable<Long> {
+ class FibonacciTask implements Callable<Long> {
         private final int n;
         private final int id;
 
@@ -44,5 +41,4 @@ public class FibonacciTaskManager {
             return b;
         }
     }
-}
 
