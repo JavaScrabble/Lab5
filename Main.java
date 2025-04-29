@@ -26,7 +26,7 @@ class Main {
                 case "1":
                     System.out.print("Podaj n do Fibonacciego: ");
                     int n = Integer.parseInt(scanner.nextLine());
-                    FutureFib fib = new FutureFib(new FibonacciTaskManager.FibonacciTask(n, tasks.size()), tasks.size());
+                    FutureFib fib = new FutureFib(new FibonacciTask(n, tasks.size()), tasks.size());
                     executor.execute(fib);
                     tasks.add(fib);
                     System.out.println("Zadanie dodane (index: " + (tasks.size() - 1) + ")");
