@@ -1,6 +1,9 @@
 import java.util.concurrent.Callable;
 
- class FibonacciTask implements Callable<Long> {
+public class FibonacciTaskManager {
+
+    // Zadanie obliczające liczbę Fibonacciego
+    static class FibonacciTask implements Callable<Long> {
         private final int n;
         private final int id;
 
@@ -17,21 +20,20 @@ import java.util.concurrent.Callable;
 
         @Override
         public Long call() {
-            if(this.n < 0) return null;
 
-            if (this.n <= 1)
-                return (long) this.n;
+            if (n <= 1)
+                return (long) n;
 
             long a = 0, b = 1;
             for (int i = 2; i <= n; i++) {
                 if (Thread.currentThread().isInterrupted()) {
-                    System.out.println(this + " przerwane");
+                    System.out.println(this + "interrupted!");
                     return null;
                 }
                 try {
                     Thread.sleep(200);
                 } catch (InterruptedException e) {
-                    System.out.println(this + " sleep() przerwane");
+                    System.out.println(this + " sleep() interrupted!");
                     return null;
                 }
                 long temp = a + b;
@@ -42,4 +44,5 @@ import java.util.concurrent.Callable;
             return b;
         }
     }
+}
 

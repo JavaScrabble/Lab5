@@ -4,10 +4,11 @@ import java.util.Scanner;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import java.util.concurrent.FutureTask;
 
-public class Main {
+class Main {
     public static void main(String[] args) {
-        ExecutorService executor = Executors.newFixedThreadPool(13);
+        ExecutorService executor = Executors.newFixedThreadPool(4);
         List<Future<Long>> tasks = new ArrayList<>();
         Scanner scanner = new Scanner(System.in);
 
@@ -25,8 +26,9 @@ public class Main {
                 case "1":
                     System.out.print("Podaj n do Fibonacciego: ");
                     int n = Integer.parseInt(scanner.nextLine());
-                    Future<Long> future = executor.submit(new FibonacciTask(n, tasks.size()));
-                    tasks.add(future);
+                    FutureFib fib = new FutureFib(new FibonacciTaskManager.FibonacciTask(n, tasks.size()), tasks.size());
+                    executor.execute(fib);
+                    tasks.add(fib);
                     System.out.println("Zadanie dodane (index: " + (tasks.size() - 1) + ")");
                     break;
 
